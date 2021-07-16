@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
-
+@livewireStyles
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- CSS only -->
@@ -18,28 +18,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <form>
-
-                    <div class="d-flex">
-                        <div>
-                            <input type="text" name="message" class="form-control w-100">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
+         @livewire('mess')
         </div>
     </div>
 
+@livewireScripts
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        window.Echo.channel('bisnuc')
-            .listen('Bisnu', (e) => {
-                console.log(e)
-            });
-    </script>
 </body>
 
 </html>

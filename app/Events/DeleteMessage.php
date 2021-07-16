@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Bisnu implements ShouldBroadcast
+class DeleteMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,12 +19,10 @@ class Bisnu implements ShouldBroadcast
      *
      * @return void
      */
-    public $message;
-
-    public function __construct($message)
+    public $id;
+    public function __construct($id)
     {
-        $this->message = $message;
-
+        $this->id = $id;
     }
 
     /**
@@ -34,6 +32,6 @@ class Bisnu implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('bisnuc');
+        return new Channel('messageDelete');
     }
 }
