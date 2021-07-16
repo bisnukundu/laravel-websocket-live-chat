@@ -20,10 +20,12 @@ class Bisnu implements ShouldBroadcast
      * @return void
      */
     public $message;
+    public $lenght;
 
-    public function __construct($message)
+    public function __construct($message,$lenght)
     {
         $this->message = $message;
+        $this->lenght = $lenght;
 
     }
 

@@ -1,14 +1,23 @@
 <div class="col-12">
+    <button type="button" class="btn my-5 btn-primary">
+        Message <span id="cnt" class="badge badge-light">{{count($message)}}</span>
+      </button>
+
     <ul class="list-group" id="chat">
         @if (isset($message))
+
             @foreach ($message as $item)
-
-                <li id="{{ $item->id }}" class="list-group-item d-flex">
-                    <p class="w-100">{{ $item->message }}</p> <button
-                        wire:click="delete({{ $item->id }})" class="btn btn-danger btn-sm mr-auto">X</button>
-                </li>
-
-
+            @if ($item->user->id === Auth::id())
+            <li id="{{ $item->id }}" class="list-group-item border-danger  fw-bold my-2 d-flex justify-content-start w-100">
+                <p class="w-100 ">{{ $item->message }}</p> <button
+                wire:click="delete({{ $item->id }})" class="btn btn-danger btn-sm mr-auto">X</button>
+            </li>
+            @else
+            <li id="{{ $item->id }}" class="list-group-item fw-bold justify-content-end my-2 d-flex w-100">
+                <p class="w-100">{{ $item->message }}</p> <button
+                wire:click="delete({{ $item->id }})" class="btn btn-danger btn-sm mr-auto">X</button>
+            </li>
+            @endif
             @endforeach
         @endif
     </ul>
@@ -21,6 +30,8 @@
             <button type="submit" class="btn btn-primary" id="sendbtn">SEND</button>
         </div>
     </form>
+
+
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
 
@@ -48,6 +59,8 @@
             li.appendChild(button);
 
             parent.appendChild(li);
+
+            document.getElementById('cnt').innerText=e.lenght;
             console.log(e)
         });
 

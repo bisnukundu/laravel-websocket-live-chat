@@ -5,16 +5,20 @@ namespace App\Http\Livewire;
 use App\Models\Message;
 use App\Events\Bisnu;
 use App\Events\DeleteMessage;
+use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 class Mess extends Component
 {
 public $messageText;
     public function create(){
 
        $message = Message::create([
-            'message' => $this->messageText
+            'message' => $this->messageText,
+            'user_id' => Auth::id()
         ]);
-        Bisnu::dispatch($message);
+        $ct = Message::count();
+        Bisnu::dispatch($message,$ct);
         $this->messageText='';
      }
 

@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Message;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +13,17 @@ use App\Models\Message;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::group(['middleware'=>'auth'],function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
 
-// Route::post('create',[MessageController::class,'create'])->name('create');
+
+require __DIR__ . '/auth.php';
